@@ -9,7 +9,6 @@ import (
 )
 
 func SquareFirstTwoEvens() {
-
 	nums := []int{1, 2, 3, 4, 5, 6}
 	seq := slices.Values(nums)
 	seq = xiter.Filter( // Filter out odd numbers
@@ -23,7 +22,21 @@ func SquareFirstTwoEvens() {
 	)
 	nums = slices.Collect(seq)
 	fmt.Println(nums) // [4 16]
+}
 
+func SquareFirstTwoEvensForLoop() {
+	nums := []int{1, 2, 3, 4, 5, 6}
+	squaredNums := make([]int, 0, 2)
+	for _, v := range nums {
+		if v%2 == 1 {
+			continue
+		}
+		squaredNums = append(squaredNums, v*v)
+		if len(squaredNums) == 2 {
+			break
+		}
+	}
+	fmt.Println(squaredNums) // [4 16]
 }
 
 // Countdown takes a value and returns a function
@@ -58,6 +71,8 @@ func UseBackward() {
 }
 
 func main() {
+	UseBackward()
 	UseCountdown()
 	SquareFirstTwoEvens()
+	SquareFirstTwoEvensForLoop()
 }
